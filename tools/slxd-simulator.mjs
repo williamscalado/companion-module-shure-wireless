@@ -59,8 +59,14 @@ net
 						if (rate > 0) meterTimer = setInterval(() => sendSamples(sock), rate)
 					}
 				} else if (verb === 'SET' && state[Number(target) - 1] && key in state[0]) {
-					state[Number(target) - 1][key] = rest.join(' ')
-					rep(sock, `REP ${target} ${key} ${rest.join(' ')}`)
+					const ch = state[Number(target) - 1]
+					let value = rest.join(' ')
+					if (key === 'AUDIO_GAIN' && (rest[0] === 'INC' || rest[0] === 'DEC')) {
+						const step = Number(rest[1]) * (rest[0] === 'INC' ? 1 : -1)
+						value = String(Math.min(60, Math.max(0, Number(ch.AUDIO_GAIN) + step))).padStart(3, '0')
+					}
+					ch[key] = value
+					rep(sock, `REP ${target} ${key} ${value}`)
 				}
 			}
 		})
