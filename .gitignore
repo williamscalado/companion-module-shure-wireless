@@ -6,3 +6,4 @@ DEBUG-INSPECT
 DEBUG-PACKAGE
 DEBUG-PACKAGED
 .yarn/install-state.gz
+*.tgz

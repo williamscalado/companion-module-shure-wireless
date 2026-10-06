@@ -9,6 +9,7 @@ import {
 import { updateActions } from './actions.js'
 import { updateFeedbacks } from './feedback.js'
 import { updateVariables } from './variables.js'
+import { updatePresets } from './presets.js'
 import WirelessApi from './internalAPI.js'
 import { BooleanFeedbackUpgradeMap } from './upgrades.js'
 import { Choices, Models } from './setup.js'
@@ -34,6 +35,7 @@ class ShureWirelessInstance extends InstanceBase {
 		this.updateActions = updateActions.bind(this)
 		this.updateFeedbacks = updateFeedbacks.bind(this)
 		this.updateVariables = updateVariables.bind(this)
+		this.updatePresets = updatePresets.bind(this)
 	}
 
 	/**
@@ -72,6 +74,7 @@ class ShureWirelessInstance extends InstanceBase {
 		this.updateActions()
 		this.updateFeedbacks()
 		this.updateVariables()
+		this.updatePresets()
 
 		if (resetConnection === true || this.socket === undefined) {
 			this.initTCP()
@@ -244,6 +247,7 @@ class ShureWirelessInstance extends InstanceBase {
 		this.updateActions()
 		this.updateVariables()
 		this.updateFeedbacks()
+		this.updatePresets()
 
 		this.initTCP()
 	}

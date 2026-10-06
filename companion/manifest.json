@@ -1,7 +1,7 @@
 {
-	"id": "shure-wireless",
-	"name": "shure-wireless",
-	"shortname": "shure-wx",
+	"id": "shure-wireless-cv",
+	"name": "shure-wireless-cv",
+	"shortname": "shure-wx-cv",
 	"description": "",
 	"version": "0.0.0",
 	"license": "MIT",
@@ -15,6 +15,10 @@
 		{
 			"name": "Joseph Adams",
 			"email": "josephdadams@gmail.com"
+		},
+		{
+			"name": "Williams Calado",
+			"email": "williamscalado@gmail.com"
 		}
 	],
 	"legacyIds": [],

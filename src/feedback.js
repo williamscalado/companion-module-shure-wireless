@@ -104,9 +104,12 @@ export function updateFeedbacks() {
 		callback: (event) => {
 			let opt = event.options
 			let channel = this.api.getChannel(parseInt(opt.channel))
+			let image = event.image && event.image.width && event.image.height ? event.image : { width: 72, height: 58 }
 			let out = {
 				alignment: 'left:top',
-				imageBuffers: [{ buffer: this.api.getIcon(opt, event.image) }],
+				imageBuffer: this.api.getIcon(opt, image),
+				imageBufferEncoding: { pixelFormat: 'ARGB' },
+				imageBufferPosition: { x: 0, y: 0, width: image.width, height: image.height },
 				size: '7',
 				text: '',
 			}
@@ -147,6 +150,13 @@ export function updateFeedbacks() {
 				addLabelData(opt.labels, channel, out)
 			} else if (Array.isArray(opt.labels)) {
 				opt.labels.forEach((item) => addLabelData(item, channel, out))
+			}
+
+			// Without labels, keep the button's own text so the icons can be combined with any preset text
+			if (out.text === '') {
+				delete out.text
+				delete out.size
+				delete out.alignment
 			}
 
 			return out
